@@ -1,0 +1,97 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema Proyecto_sw2
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema Proyecto_sw2
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Proyecto_sw2` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `Proyecto_sw2` ;
+
+-- -----------------------------------------------------
+-- Table `Proyecto_sw2`.`Rol`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Rol` (
+  `idRol` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(45) NULL,
+  PRIMARY KEY (`idRol`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Proyecto_sw2`.`Persona`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Persona` (
+  `idPersona` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellidos` VARCHAR(45) NOT NULL,
+  `Codigo_Alumno` VARCHAR(45) NULL,
+  `Contraseña` VARCHAR(45) NOT NULL,
+  `DNI` VARCHAR(45) NOT NULL,
+  `Correo` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(45) NOT NULL,
+  `Estado` VARCHAR(45) NOT NULL,
+  `Persona_idalumno` VARCHAR(45) NOT NULL,
+  `Rol_idRol` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idPersona`),
+  INDEX `fk_Persona_Persona_idx` (`Persona_idalumno` ASC),
+  INDEX `fk_Persona_Rol1_idx` (`Rol_idRol` ASC),
+  CONSTRAINT `fk_Persona_Persona`
+    FOREIGN KEY (`Persona_idalumno`)
+    REFERENCES `Proyecto_sw2`.`Persona` (`idPersona`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Persona_Rol1`
+    FOREIGN KEY (`Rol_idRol`)
+    REFERENCES `Proyecto_sw2`.`Rol` (`idRol`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Proyecto_sw2`.`Matricula`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Matricula` (
+  `idMatricula` VARCHAR(45) NOT NULL,
+  `Curso` VARCHAR(45) NOT NULL,
+  `Codigo_Alumno` VARCHAR(45) NULL,
+  `Codigo_Asesor` VARCHAR(45) NOT NULL,
+  `Ciclo` VARCHAR(45) NOT NULL,
+  `Persona_idPersona` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idMatricula`),
+  INDEX `fk_ciclo_academico_Persona1_idx` (`Persona_idPersona` ASC),
+  CONSTRAINT `fk_ciclo_academico_Persona1`
+    FOREIGN KEY (`Persona_idPersona`)
+    REFERENCES `Proyecto_sw2`.`Persona` (`idPersona`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Proyecto_sw2`.`Archivos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Archivos` (
+  `idArchivos` VARCHAR(45) NOT NULL,
+  `Ubicación` VARCHAR(45) NULL,
+  `Matricula_idMatricula` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idArchivos`),
+  INDEX `fk_Archivos_Matricula1_idx` (`Matricula_idMatricula` ASC),
+  CONSTRAINT `fk_Archivos_Matricula1`
+    FOREIGN KEY (`Matricula_idMatricula`)
+    REFERENCES `Proyecto_sw2`.`Matricula` (`idMatricula`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
