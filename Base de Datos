@@ -5,88 +5,110 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema Proyecto_sw2
+-- Schema etesis0891
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema Proyecto_sw2
+-- Schema etesis0891
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Proyecto_sw2` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `Proyecto_sw2` ;
+CREATE SCHEMA IF NOT EXISTS `etesis0891` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `etesis0891` ;
 
 -- -----------------------------------------------------
--- Table `Proyecto_sw2`.`Rol`
+-- Table `etesis0891`.`Rol`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Rol` (
-  `idRol` VARCHAR(45) NOT NULL,
-  `Nombre` VARCHAR(45) NULL,
+CREATE TABLE IF NOT EXISTS `etesis0891`.`Rol` (
+  `idRol` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idRol`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Proyecto_sw2`.`Persona`
+-- Table `etesis0891`.`Persona`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Persona` (
-  `idPersona` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `etesis0891`.`Persona` (
+  `idPersona` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `Apellidos` VARCHAR(45) NOT NULL,
-  `Codigo_Alumno` VARCHAR(45) NULL,
-  `Contraseña` VARCHAR(45) NOT NULL,
+  `Codigo` CHAR(8) NOT NULL,
+  `Password` CHAR(64) NOT NULL,
   `DNI` VARCHAR(45) NOT NULL,
   `Correo` VARCHAR(45) NOT NULL,
   `Telefono` VARCHAR(45) NOT NULL,
   `Estado` VARCHAR(45) NOT NULL,
-  `Persona_idalumno` VARCHAR(45) NOT NULL,
-  `Rol_idRol` VARCHAR(45) NOT NULL,
+  `idRol` INT NOT NULL,
   PRIMARY KEY (`idPersona`),
-  INDEX `fk_Persona_Persona_idx` (`Persona_idalumno` ASC),
-  INDEX `fk_Persona_Rol1_idx` (`Rol_idRol` ASC),
-  CONSTRAINT `fk_Persona_Persona`
-    FOREIGN KEY (`Persona_idalumno`)
-    REFERENCES `Proyecto_sw2`.`Persona` (`idPersona`)
+  INDEX `fk_Persona_Rol1_idx` (`idRol` ASC),
+  CONSTRAINT `fk_Persona_Rol1`
+    FOREIGN KEY (`idRol`)
+    REFERENCES `etesis0891`.`Rol` (`idRol`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `etesis0891`.`Matricula`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `etesis0891`.`Matricula` (
+  `idMatricula` INT NOT NULL AUTO_INCREMENT,
+  `Curso` CHAR(6) NOT NULL,
+  `Ciclo` VARCHAR(45) NOT NULL,
+  `idAsesor` INT NOT NULL,
+  `idAlumno` INT NOT NULL,
+  PRIMARY KEY (`idMatricula`),
+  INDEX `fk_Matricula_Persona1_idx` (`idAsesor` ASC),
+  INDEX `fk_Matricula_Persona2_idx` (`idAlumno` ASC),
+  CONSTRAINT `fk_Matricula_Persona1`
+    FOREIGN KEY (`idAsesor`)
+    REFERENCES `etesis0891`.`Persona` (`idPersona`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Persona_Rol1`
-    FOREIGN KEY (`Rol_idRol`)
-    REFERENCES `Proyecto_sw2`.`Rol` (`idRol`)
+  CONSTRAINT `fk_Matricula_Persona2`
+    FOREIGN KEY (`idAlumno`)
+    REFERENCES `etesis0891`.`Persona` (`idPersona`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Proyecto_sw2`.`Matricula`
+-- Table `etesis0891`.`Avance`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Matricula` (
-  `idMatricula` VARCHAR(45) NOT NULL,
-  `Curso` VARCHAR(45) NOT NULL,
-  `Codigo_Alumno` VARCHAR(45) NULL,
-  `Codigo_Asesor` VARCHAR(45) NOT NULL,
-  `Ciclo` VARCHAR(45) NOT NULL,
-  `Persona_idPersona` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idMatricula`),
-  INDEX `fk_ciclo_academico_Persona1_idx` (`Persona_idPersona` ASC),
-  CONSTRAINT `fk_ciclo_academico_Persona1`
-    FOREIGN KEY (`Persona_idPersona`)
-    REFERENCES `Proyecto_sw2`.`Persona` (`idPersona`)
+CREATE TABLE IF NOT EXISTS `etesis0891`.`Avance` (
+  `idAvance` INT NOT NULL AUTO_INCREMENT,
+  `idMatricula` INT NOT NULL,
+  `ComentarioAsesor` TEXT NULL,
+  `ComentarioAlumno` TEXT NULL,
+  `Semana` INT NOT NULL,
+  `FechaLimite` TIMESTAMP NOT NULL,
+  `Descripcion` TEXT NULL,
+  PRIMARY KEY (`idAvance`),
+  INDEX `fk_Avance_Matricula1_idx` (`idMatricula` ASC),
+  CONSTRAINT `fk_Avance_Matricula1`
+    FOREIGN KEY (`idMatricula`)
+    REFERENCES `etesis0891`.`Matricula` (`idMatricula`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+COMMENT = '	';
 
 
 -- -----------------------------------------------------
--- Table `Proyecto_sw2`.`Archivos`
+-- Table `etesis0891`.`Documento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Proyecto_sw2`.`Archivos` (
-  `idArchivos` VARCHAR(45) NOT NULL,
-  `Ubicación` VARCHAR(45) NULL,
-  `Matricula_idMatricula` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idArchivos`),
-  INDEX `fk_Archivos_Matricula1_idx` (`Matricula_idMatricula` ASC),
-  CONSTRAINT `fk_Archivos_Matricula1`
-    FOREIGN KEY (`Matricula_idMatricula`)
-    REFERENCES `Proyecto_sw2`.`Matricula` (`idMatricula`)
+CREATE TABLE IF NOT EXISTS `etesis0891`.`Documento` (
+  `idDocumento` INT NOT NULL AUTO_INCREMENT,
+  `URI` VARCHAR(255) NOT NULL,
+  `FechaSubida` TIMESTAMP NOT NULL,
+  `Estado` CHAR(1) NOT NULL,
+  `idAvance` INT NOT NULL,
+  PRIMARY KEY (`idDocumento`),
+  INDEX `fk_Documento_Avance1_idx` (`idAvance` ASC),
+  CONSTRAINT `fk_Documento_Avance1`
+    FOREIGN KEY (`idAvance`)
+    REFERENCES `etesis0891`.`Avance` (`idAvance`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
