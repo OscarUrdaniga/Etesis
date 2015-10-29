@@ -14,6 +14,23 @@
 
     <body>
         <%@include file = "/WEB-INF/jsp/comun/cabecera.jsp" %>
+        
+           <div class="row" id="formulariologin">
+        <div id="error" class="alert alert-danger" style="<%= request.getAttribute("error")!=null ? "display:block;" : "display:none;" %>" >Datos Incorrectos</div>     
+    <form method="post" action="<%=request.getContextPath()%>/ServletCuenta?action=login">
+    <div id="login" class="form-group col-md-7">
+    	
+       	<label for="correo">nombre de usuario </label><input class="form-control" placeholder="ingresa nombre del alumno" id="usuario" name="usuario" /><br/>
+        <label for="password">Password </label><input  type="password" id="password" name="password" class="form-control"/>
+    </div>
+    <div class="form-group col-md-5" id="otros">
+    		<p class="derecha"><a href="#">Recuperar Contraseña</a></p>
+            <p class="derecha"><a href="#">Registrarse</a></p>
+    	    <p><input type="submit" value="Ingresar" class="btn btn-default misubmit" /></p>
+             
+    </div >
+     </form>
+     </div>
 
 
     </body>
