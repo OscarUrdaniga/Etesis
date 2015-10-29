@@ -9,6 +9,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <%@include file="/WEB-INF/jsp/comun/recursos.jsp" %>
         <title>etesis</title>
+          <div   class="container-fluid">
+         <div  class="row">
+            <div class="col-xs-6" ALIGN=left >
+              <h1 id="logo"><img src="img/e-tesis.png"  height="100" width="250"></h1>
+                
+             
+            </div>
+             <div class="col-xs-6" ALIGN=right >
+                 <br>
+                  <br>bienvenido
+                  <br>Carlos Rubin de Celis
+                  <br>
+                <br>
+                <input type="button" class="btn btn-primary btn-md" id="logout" value="cerrar sesion">
+             </div>
+             
+    </div>
  
 
     </head>
