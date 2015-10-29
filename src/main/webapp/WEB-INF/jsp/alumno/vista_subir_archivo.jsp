@@ -14,7 +14,73 @@
 
     <body>
         <%@include file = "/WEB-INF/jsp/comun/cabecera.jsp" %>
+<div   class="container-fluid">
+         <div  class="row">
+            <div class="col-xs-6" ALIGN=left >
+              <h1 id="logo"><img src="img/e-tesis.png"  height="100" width="250"></h1>
+                
+             
+            </div>
+             <div class="col-xs-6" ALIGN=right >
+                 <br>
+                  <br>bienvenido
+                  <br>Carlos Rubin de Celis
+                  <br>
+                <br>
+                <input type="button" id="logout" value="cerrar sesion">
+             </div>
+             
+    </div>
+        
+        <div class="row" >
+             <div  id="aviso" class="col-xs-3">
+                 25 de septiembre del 2015  
+                 ultimo aviso del asesor:
+                 
+                 
+            </div>
+            
+             <div  id="sem" class="col-xs-9">
+                 <h4>Subir archivo</h4> 
+          <input class="form-control" placeholder="file://" id="correo" name="correo" />
 
+                
+            
+                 <br>
+            
+               
+                  <DIV >     <input type="button"  class="btn btn-primary btn-md" id="addfil" value="subir archivo" align=""> 
+                  <input type="button" id="addfil"  class="btn btn-primary btn-md" value="eliminar archivo" align="">
+                       <br>
+                       
+                       <br>
+  
+                      
+                      
+                 </DIV>
+              
+        
+            </div>
+         
+        </div>
+        
+        
+      
+        
+        <div class="row">
+            <div  id="aviso"  class="col-xs-3">
+                Usuarios y alumnos
+                 
+                 
+            </div>
+            
+           
+        </div>
+            
+            
+        
+    </div>
+        
 
     </body>
 </html>
