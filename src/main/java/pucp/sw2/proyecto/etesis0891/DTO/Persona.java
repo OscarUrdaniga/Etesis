@@ -9,7 +9,7 @@ package pucp.sw2.proyecto.etesis0891.DTO;
  *
  * @author Marcelo
  */
-public class PersonaDTO {
+public class Persona {
     private int idpersona;
         private String nombre;
     private String apelidos;
@@ -19,9 +19,18 @@ public class PersonaDTO {
     private String correo;
     private String Telefono;
     private String estado;
-    private String phone;
+    
+    private Rol rol;
 
-    private int idrol;
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+   
 
     public int getIdpersona() {
         return idpersona;
@@ -95,22 +104,9 @@ public class PersonaDTO {
         this.estado = estado;
     }
 
-    public String getPhone() {
-        return phone;
-    }
+   
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public int getIdrol() {
-        return idrol;
-    }
-
-    public void setIdrol(int idrol) {
-        this.idrol = idrol;
-    }
-    
+   
     
     
 }

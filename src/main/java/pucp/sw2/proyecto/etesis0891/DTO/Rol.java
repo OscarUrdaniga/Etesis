@@ -9,7 +9,7 @@ package pucp.sw2.proyecto.etesis0891.DTO;
  *
  * @author Marcelo
  */
-public class rolDTO {
+public class Rol {
     
      private int idrol;
      
