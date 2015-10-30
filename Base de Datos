@@ -11,6 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema etesis0891
 -- -----------------------------------------------------
+DROP DATABASE IF EXISTS `etesis0891`;
 CREATE SCHEMA IF NOT EXISTS `etesis0891` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `etesis0891` ;
 
@@ -23,6 +24,9 @@ CREATE TABLE IF NOT EXISTS `etesis0891`.`Rol` (
   PRIMARY KEY (`idRol`))
 ENGINE = InnoDB;
 
+INSERT INTO `etesis0891`.`rol` (`idRol`, `Nombre`) VALUES ('1', 'Admin');
+INSERT INTO `etesis0891`.`rol` (`idRol`, `Nombre`) VALUES ('2', 'Asesor');
+INSERT INTO `etesis0891`.`rol` (`idRol`, `Nombre`) VALUES ('3', 'Alumno');
 
 -- -----------------------------------------------------
 -- Table `etesis0891`.`Persona`
@@ -46,6 +50,12 @@ CREATE TABLE IF NOT EXISTS `etesis0891`.`Persona` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+INSERT INTO `etesis0891`.`persona` (`idPersona`, `Nombre`, `Apellidos`, `Codigo`, `Password`, `DNI`, `Correo`, `Telefono`, `Estado`, `idRol`) VALUES ('1', 'Juan', 'Pérez Valverde', '20045968', SHA2('123456',256), '78965412', 'jperez@pucp.pe', '925692487', 'Activo', '1');
+INSERT INTO `etesis0891`.`persona` (`idPersona`, `Nombre`, `Apellidos`, `Codigo`, `Password`, `DNI`, `Correo`, `Telefono`, `Estado`, `idRol`) VALUES ('2', 'Valeria', 'Saenz Guevara', '20104849', SHA2('123456',256), '75485123', 'vsaenz@pucp.pe', '961253614', 'Activo', '2');
+INSERT INTO `etesis0891`.`persona` (`idPersona`, `Nombre`, `Apellidos`, `Codigo`, `Password`, `DNI`, `Correo`, `Telefono`, `Estado`, `idRol`) VALUES ('3', 'José', 'Joya Martínez', '20159648', SHA2('123456',256), '32568745', 'jjoya@pucp.pe', '984263515', 'Activo', '3');
+INSERT INTO `etesis0891`.`persona` (`idPersona`, `Nombre`, `Apellidos`, `Codigo`, `Password`, `DNI`, `Correo`, `Telefono`, `Estado`, `idRol`) VALUES ('4', 'Roberto', 'Méndez Solórzano', '20094815', SHA2('123456',256), '56487892', 'rmendez@pucp.pe', '984556231', 'Activo', '3');
+INSERT INTO `etesis0891`.`persona` (`idPersona`, `Nombre`, `Apellidos`, `Codigo`, `Password`, `DNI`, `Correo`, `Telefono`, `Estado`, `idRol`) VALUES ('5', 'Daniel', 'García Gutiérrez', '20094857', SHA2('123456',256), '89561278', 'dgarcia@pucp.pe', '956223151', 'Activo', '3');
 
 
 -- -----------------------------------------------------
@@ -72,6 +82,11 @@ CREATE TABLE IF NOT EXISTS `etesis0891`.`Matricula` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('1', 'IEE308', '2015-2', '2', '3');
+INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('2', 'IEE309', '2015-2', '2', '4');
+INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('3', 'IEE309', '2015-2', '2', '5');
+
+
 
 -- -----------------------------------------------------
 -- Table `etesis0891`.`Avance`
@@ -94,6 +109,9 @@ CREATE TABLE IF NOT EXISTS `etesis0891`.`Avance` (
 ENGINE = InnoDB
 COMMENT = '	';
 
+INSERT INTO `etesis0891`.`avance` (`idAvance`, `idMatricula`, `ComentarioAsesor`, `ComentarioAlumno`, `Semana`, `FechaLimite`, `Descripcion`) VALUES ('1', '1', 'Buen avance', 'Aquí le dejo mi avance, asesor', '10', '2015-10-30 00:00:00', 'Sube el avance del Marco Teórico');
+
+
 
 -- -----------------------------------------------------
 -- Table `etesis0891`.`Documento`
@@ -113,6 +131,7 @@ CREATE TABLE IF NOT EXISTS `etesis0891`.`Documento` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO `etesis0891`.`documento` (`idDocumento`, `URI`, `FechaSubida`, `Estado`, `idAvance`) VALUES ('1', 'C:\\User\\Documents\\ArchivosTesis', '2015-10-27 15:25:58', 'E', '1');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
