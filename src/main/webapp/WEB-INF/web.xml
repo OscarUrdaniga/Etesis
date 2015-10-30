@@ -24,6 +24,10 @@
         <servlet-name>AlumnoController</servlet-name>
         <servlet-class>pucp.sw2.proyecto.etesis0891.controladores.AlumnoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>indexController</servlet-name>
+        <servlet-class>pucp.sw2.proyecto.etesis0891.controladores.IndexController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>AlumnoController</servlet-name>
         <url-pattern>/AlumnoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>indexController</servlet-name>
+        <url-pattern>/indexController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

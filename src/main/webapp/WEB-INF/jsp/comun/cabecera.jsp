@@ -1,6 +1,6 @@
 <div  class="row">
     <div class="col-xs-6" ALIGN=left >
-        <h1 id="logo"><img src="img/e-tesis.png"  height="100" width="250"></h1>
+        <h1 id="logo"><img src="/WEB-INF/jsp/img/etesis.png"  height="100" width="250"></h1>
 
 
     </div>
