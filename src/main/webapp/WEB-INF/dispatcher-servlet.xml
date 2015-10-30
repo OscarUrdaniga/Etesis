@@ -23,5 +23,5 @@
     <context:annotation-config/>
 
     <!--Indicamos el paquete de las clases anotadas como controladores. -->
-    <context:component-scan base-package="pucp.sw2.proyectom.controladores"/>
+    <context:component-scan base-package="pucp.sw2.proyecto.etesis0891.controladores"/>
 </beans>

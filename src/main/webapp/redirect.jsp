@@ -7,4 +7,4 @@ servlet but should be the only JSP outside of WEB-INF.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Oops! -->
-<% response.sendRedirect("proyecto/listar"); %>
+<% response.sendRedirect("vista_inicio_login"); %>

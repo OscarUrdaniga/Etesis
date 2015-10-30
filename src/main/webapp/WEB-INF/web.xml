@@ -12,6 +12,18 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>pucp.sw2.proyecto.etesis0891.controladores.AdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AsesorController</servlet-name>
+        <servlet-class>pucp.sw2.proyecto.etesis0891.controladores.AsesorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AlumnoController</servlet-name>
+        <servlet-class>pucp.sw2.proyecto.etesis0891.controladores.AlumnoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
@@ -23,6 +35,18 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AsesorController</servlet-name>
+        <url-pattern>/AsesorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AlumnoController</servlet-name>
+        <url-pattern>/AlumnoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
