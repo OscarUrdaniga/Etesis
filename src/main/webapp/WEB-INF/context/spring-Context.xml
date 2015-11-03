@@ -13,7 +13,7 @@
 ">
 
 <context:annotation-config/>    
-<context:component-scan base-package="pucp.sw2.proyectom.dao"/>
+<context:component-scan base-package="pucp.sw2.proyecto.etesis0891"/>
 
 <bean id="dataSource"
     class="org.springframework.jdbc.datasource.DriverManagerDataSource"
