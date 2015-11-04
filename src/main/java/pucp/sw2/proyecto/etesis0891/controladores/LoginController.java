@@ -1,10 +1,6 @@
 package pucp.sw2.proyecto.etesis0891.controladores;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-/*
+
 package pucp.sw2.proyecto.etesis0891.controladores;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -20,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  *
  * @author vea
  */
-/*
+
 @Controller
 @SessionAttributes("personaDTO")
 public class LoginController {
