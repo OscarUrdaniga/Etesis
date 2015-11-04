@@ -94,9 +94,6 @@
         </div>
         
         
-      
-        
-        <div class="row">
             <div id="aviso" class="col-xs-3">
                 Usuarios y alumnos
                      <br>

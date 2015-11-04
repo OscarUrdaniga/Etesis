@@ -7,9 +7,11 @@ package pucp.sw2.proyecto.etesis0891.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.tree.RowMapper;
+
 import pucp.sw2.proyecto.etesis0891.DTO.Persona;
 import pucp.sw2.proyecto.etesis0891.DTO.Rol;
+import org.springframework.jdbc.core.RowMapper;
+
 
 /**
  *
