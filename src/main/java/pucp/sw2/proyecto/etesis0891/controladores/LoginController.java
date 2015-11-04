@@ -1,7 +1,6 @@
 package pucp.sw2.proyecto.etesis0891.controladores;
 
 
-package pucp.sw2.proyecto.etesis0891.controladores;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
