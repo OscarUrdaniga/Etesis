@@ -23,7 +23,7 @@ public class PersonaMapper implements RowMapper<Persona>{
         Persona persona = new Persona();
         persona.setIdpersona(rs.getInt("p.idPersona"));
         persona.setNombre(rs.getString("p.nombre"));
-        persona.setApelidos(rs.getString("p.Apellidos"));
+        persona.setApellidos(rs.getString("p.Apellidos"));
         persona.setCodigo(rs.getString("p.Codigo"));
         persona.setPassword(rs.getString("p.password"));
         persona.setDNI(rs.getString("p.DNI"));
