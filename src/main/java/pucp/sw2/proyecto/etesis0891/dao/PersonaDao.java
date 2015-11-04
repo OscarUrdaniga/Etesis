@@ -46,6 +46,12 @@ public class PersonaDao  {
        
     } 
     
+    
+    
+    
+    
+    
+    
      public List<Persona> listaPersonasRol(Rol rol){
      String query ="select p.idPersona,"+
                 "p.nombre, "+
@@ -68,6 +74,63 @@ public class PersonaDao  {
           List<Persona> user_list = jdbcTemplate.query(query,parametros.toArray(), new PersonaMapper());
         return user_list;
      }
+     
+     
+     
+     public List<Persona> busquedaperso(Rol rol,String dato ){
+         tringBuilder sql = new StringBuilder();
+      
+      sql.append("select * from (select p.idPersona, p.nombre, p.Apellidos, p.Codigo, p.Password, p.DNI, p.correo,p.telefono,p.Estado,p.idRol,r.nombre as nombreRol from persona p, rol r where p.idRol= r.idRol and r.idRol=? ) tg where nombre LIKE '%?%' or Apellidos LIKE '%?%' or Correo LIKE '%?%' OR Estado= '%?%';" );
+          
+     List<Object> parametros = new ArrayList<Object>();
+        parametros.add(rol.getIdrol());
+        parametros.add(dato);
+        parametros.add(dato);
+        parametros.add(dato);
+        parametros.add(dato);
+     
+      JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+          List<Persona> user_list = jdbcTemplate.query(sql,parametros.toArray(), new PersonaMapper());
+        return user_list;
+     }
+     
+      public List<Persona> busquedaperso(Rol rol,int dato ){
+         tringBuilder sql = new StringBuilder();
+      
+      sql.append("select * from (select p.idPersona, p.nombre, p.Apellidos, p.Codigo, p.Password, p.DNI, p.correo,p.telefono,p.Estado,p.idRol,r.nombre as nombreRol from persona p, rol r where p.idRol= r.idRol and r.idRol=? ) tg where DNI LIKE '%?%' or telefono LIKE '%?%' or codigo LIKE '%?%';");
+      
+   
+     List<Object> parametros = new ArrayList<Object>();
+        parametros.add(rol.getIdrol());
+        parametros.add(dato);
+        parametros.add(dato);
+        parametros.add(dato);
+     
+      JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+          List<Persona> user_list = jdbcTemplate.query(sql,parametros.toArray(), new PersonaMapper());
+        return user_list;
+     }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
       public void create(Persona persona) {
       StringBuilder sql = new StringBuilder();
