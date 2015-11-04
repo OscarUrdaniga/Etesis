@@ -11,3 +11,7 @@
 <link rel="stylesheet" href="css/estilo.css">
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- DataTables -->
+    <link rel="stylesheet" href="css/dataTables.bootstrap.css">
