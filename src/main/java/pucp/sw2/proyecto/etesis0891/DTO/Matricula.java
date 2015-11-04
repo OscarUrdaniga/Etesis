@@ -14,8 +14,32 @@ public class Matricula {
      private int idmatricula;
      
       private String Curso;
-
+      
       private String Ciclo;
+      
+      private int idAsesor;
+     
+      private int idAlumno;
+
+    public int getIdAsesor() {
+        return idAsesor;
+    }
+
+    public void setIdAsesor(int idAsesor) {
+        this.idAsesor = idAsesor;
+    }
+
+    public int getIdAlumno() {
+        return idAlumno;
+    }
+
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno = idAlumno;
+    }
+
+   
+
+     
 
     public int getIdmatricula() {
         return idmatricula;
