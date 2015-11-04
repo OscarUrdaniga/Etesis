@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-        <security:http pattern="/tools/**" security="none" />
+        <security:http pattern="/resources/**" security="none" />
       
 	<security:http auto-config="true" use-expressions="true">
 		<security:form-login login-page="/login.do"
@@ -41,8 +41,8 @@
 			<security:password-encoder hash="sha-256" />
 			<security:jdbc-user-service
 				data-source-ref="dataSource" role-prefix="ROLE_"
-				users-by-username-query="select Codigo, Password from personas where Codigo=?"
-				authorities-by-username-query="select e.Codigo, e.rol from persona e where e.Codigo =?" />
+				users-by-username-query="select Codigo, Password, CASE Estado WHEN 'Activo' THEN 'true' ELSE 'false' END from persona where Codigo='?';"
+                                    authorities-by-username-query="select e.Codigo, r.Nombre from persona e, rol r where e.Codigo ='?' and e.idRol = r.idRol and e.Estado = 'Activo';" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>

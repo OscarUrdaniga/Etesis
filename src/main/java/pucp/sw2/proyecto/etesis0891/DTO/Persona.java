@@ -10,16 +10,18 @@ package pucp.sw2.proyecto.etesis0891.DTO;
  * @author Marcelo
  */
 public class Persona {
+
     private int idpersona;
-        private String nombre;
-    private String apelidos;
+    private String nombre;
+    private String apellidos;
     private String codigo;
     private String password;
+    private String hash;
     private String DNI;
     private String correo;
     private String Telefono;
     private String estado;
-    
+
     private Rol rol;
 
     public Rol getRol() {
@@ -29,8 +31,6 @@ public class Persona {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
-   
 
     public int getIdpersona() {
         return idpersona;
@@ -48,12 +48,12 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getApelidos() {
-        return apelidos;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApelidos(String apelidos) {
-        this.apelidos = apelidos;
+    public void setApellidos(String apelidos) {
+        this.apellidos = apelidos;
     }
 
     public String getCodigo() {
@@ -70,6 +70,14 @@ public class Persona {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getDNI() {
@@ -104,9 +112,4 @@ public class Persona {
         this.estado = estado;
     }
 
-   
-
-   
-    
-    
 }
