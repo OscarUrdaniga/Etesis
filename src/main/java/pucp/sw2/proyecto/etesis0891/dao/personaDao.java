@@ -17,7 +17,7 @@ import pucp.sw2.proyecto.etesis0891.mapper.PersonaMapper;
  *
  * @author gtrpucp
  */
-public class PersonaDao {
+public class personaDao {
     @Autowired
     private DataSource dataSource;
     
