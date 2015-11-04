@@ -27,12 +27,12 @@
                 
                 <div class="panel-heading">Listado de Personas</div>                  
                
-                    <table class="table">
+                    <table id="example2" class="ALUMNO">
                         <thead>
                             <th>Nombre </th>
                             <th>Apellidos</th>  
                             <th>codigo</th> 
-                             <th>contraseÃ±a</th> 
+                             <th>contraseña</th> 
                               <th>DNI</th> 
                                <th>Telefono</th> 
                                <th>estado</th> 
@@ -67,5 +67,28 @@
             </div>    
         </div> 
 
+            <script src="js/jQuery-2.1.4.min.js"></script>
+  
+  
+    <!-- DataTables -->
+    <script src="js/jquery.dataTables.min.js"></script>
+   
+    <script src="js/dataTables.bootstrap.min.js"></script>
+     <!-- page script -->
+    <script>
+      $(function () {
+        
+        $('#example2').DataTable({
+          "paging": false,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": false,
+          "info": false,
+          "autoWidth": true
+        });
+      });
+    </script>
+        
+        
     </body>
 </html>
