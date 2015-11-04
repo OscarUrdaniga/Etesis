@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pucp.sw2.proyecto.etesis0891.DTO.Persona;
-import pucp.sw2.proyecto.etesis0891.dao.PersonaDao;
+import pucp.sw2.proyecto.etesis0891.dao.personaDao;
 
 
 @Controller(value = "personaController")
@@ -22,7 +22,7 @@ import pucp.sw2.proyecto.etesis0891.dao.PersonaDao;
 public class PersonaController {
     
     @Autowired
-    PersonaDao personaDao;
+    personaDao personaDao;
     
     
     /* se configura un log para este controlador*/
