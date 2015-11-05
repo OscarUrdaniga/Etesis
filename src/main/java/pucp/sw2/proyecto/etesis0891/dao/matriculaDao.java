@@ -24,42 +24,40 @@ import pucp.sw2.proyecto.etesis0891.mapper.PersonaMapper;
  * @author Marcelo
  */
 public class matriculaDao {
+
     @Autowired
     private DataSource dataSource;
-    
-     public List<Matricula> listaMatricula(){
-         
-         String query ="select m.idMatricula,m.Curso , m.Ciclo, m.idAsesor, m.idAlumno from matricula m ";
-         
-         
-         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-          List<Matricula> matricula_lista = jdbcTemplate.query(query, new MatriculaMapper());
+
+    public List<Matricula> listaMatricula() {
+
+        String query = "select m.idMatricula,m.Curso , m.Ciclo, m.idAsesor, m.idAlumno from matricula m ";
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Matricula> matricula_lista = jdbcTemplate.query(query, new MatriculaMapper());
         return matricula_lista;
-       
-     }
-     
-     public void create(Matricula matricula){
-         StringBuilder sql = new StringBuilder();
-         
-         
-          sql.append("INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('?', '?', '?', '?', '?');");
-     
-     JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            List<Object> parametros = new ArrayList<Object>();
-     
-                parametros.add(matricula.getIdmatricula());
-                parametros.add(matricula.getCurso());
-                parametros.add(matricula.getCiclo());
-                parametros.add(matricula.getIdAsesor());
-                parametros.add(matricula.getIdAlumno());
-     
-     jdbcTemplate.update(sql.toString(), parametros.toArray());
-   
-     
-     }
-    
-      public void actualizar_matricula(Matricula matricula){
-        
+
+    }
+
+    public void create(Matricula matricula) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('?', '?', '?', '?', '?');");
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Object> parametros = new ArrayList<Object>();
+
+        parametros.add(matricula.getIdmatricula());
+        parametros.add(matricula.getCurso());
+        parametros.add(matricula.getCiclo());
+        parametros.add(matricula.getIdAsesor());
+        parametros.add(matricula.getIdAlumno());
+
+        jdbcTemplate.update(sql.toString(), parametros.toArray());
+
+    }
+
+    public void actualizar_matricula(Matricula matricula) {
+
         StringBuilder sb = new StringBuilder();
         sb.append(" update matricula ");
         sb.append(" set Curso = ? ,");
@@ -67,22 +65,24 @@ public class matriculaDao {
         sb.append(" Asesor = ? ,");
         sb.append(" Alumno = ? ");
         sb.append(" where idMatricula = ? ");
-    JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-    jdbcTemplate.update(sb.toString(),new Object[]{matricula.getCurso(),
-        matricula.getCiclo(),matricula.getIdAsesor(),matricula.getIdAlumno(),matricula.getIdmatricula()});
-        
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update(sb.toString(), new Object[]{matricula.getCurso(),
+            matricula.getCiclo(), matricula.getIdAsesor(), matricula.getIdAlumno(), matricula.getIdmatricula()});
+
     }
-      
-       public boolean delete(Matricula matricula) {
+
+    public boolean delete(Matricula matricula) {
         boolean result = false;
-        
+
         if (this.connect()) {
             try {
                 String query = "DELETE FROM matricula WHERE idMatricula = ?";
                 PreparedStatement pstmt = this.conn.prepareStatement(query);
                 pstmt.setInt(1, matricula.getIdmatricula());
                 pstmt.execute();
-                 if (pstmt.getUpdateCount()>0) result=true;
+                if (pstmt.getUpdateCount() > 0) {
+                    result = true;
+                }
                 pstmt.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DaoPersona.class.getName()).log(Level.SEVERE, null, ex);

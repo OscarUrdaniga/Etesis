@@ -21,7 +21,6 @@ public class Persona {
     private String correo;
     private String Telefono;
     private String estado;
-
     private Rol rol;
 
     public Rol getRol() {
