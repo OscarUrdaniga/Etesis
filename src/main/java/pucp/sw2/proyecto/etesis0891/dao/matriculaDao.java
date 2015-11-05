@@ -5,8 +5,12 @@
  */
 package pucp.sw2.proyecto.etesis0891.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 import pucp.sw2.proyecto.etesis0891.DTO.Matricula;
 import pucp.sw2.proyecto.etesis0891.DTO.Persona;
@@ -54,4 +58,42 @@ public class matriculaDao {
      
      }
     
+      public void actualizar_matricula(Matricula matricula){
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(" update matricula ");
+        sb.append(" set Curso = ? ,");
+        sb.append(" Ciclo = ? ,");
+        sb.append(" Asesor = ? ,");
+        sb.append(" Alumno = ? ");
+        sb.append(" where idMatricula = ? ");
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    jdbcTemplate.update(sb.toString(),new Object[]{matricula.getCurso(),
+        matricula.getCiclo(),matricula.getIdAsesor(),matricula.getIdAlumno(),matricula.getIdmatricula()});
+        
+    }
+      
+       public boolean delete(Matricula matricula) {
+        boolean result = false;
+        
+        if (this.connect()) {
+            try {
+                String query = "DELETE FROM matricula WHERE idMatricula = ?";
+                PreparedStatement pstmt = this.conn.prepareStatement(query);
+                pstmt.setInt(1, matricula.getIdmatricula());
+                pstmt.execute();
+                 if (pstmt.getUpdateCount()>0) result=true;
+                pstmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoPersona.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    this.disconnect();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DaoPersona.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return result;
+    }
 }
