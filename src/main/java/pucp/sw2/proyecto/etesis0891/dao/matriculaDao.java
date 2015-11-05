@@ -38,7 +38,7 @@ public class matriculaDao {
          StringBuilder sql = new StringBuilder();
          
          
-          sql.append("INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('5', 'IEE308', '2015-1', '2', '3');");
+          sql.append("INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('?', '?', '?', '?', '?');");
      
      JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             List<Object> parametros = new ArrayList<Object>();
