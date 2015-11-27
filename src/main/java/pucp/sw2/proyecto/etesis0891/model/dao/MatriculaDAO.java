@@ -46,12 +46,11 @@ public class MatriculaDAO {
     public void agregarMatricula(MatriculaBean matricula) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("INSERT INTO `etesis0891`.`matricula` (`idMatricula`, `Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES ('?', '?', '?', '?', '?');");
+        sql.append("INSERT INTO `etesis0891`.`matricula` (`Curso`, `Ciclo`, `idAsesor`, `idAlumno`) VALUES (?, ?, ?, ?);");
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         List<Object> parametros = new ArrayList<Object>();
 
-        parametros.add(matricula.getIdmatricula());
         parametros.add(matricula.getCurso());
         parametros.add(matricula.getCiclo());
         parametros.add(matricula.getIdAsesor());
@@ -67,8 +66,8 @@ public class MatriculaDAO {
         sb.append(" update matricula ");
         sb.append(" set Curso = ? ,");
         sb.append(" Ciclo = ? ,");
-        sb.append(" Asesor = ? ,");
-        sb.append(" Alumno = ? ");
+        sb.append(" idAsesor = ? ,");
+        sb.append(" idAlumno = ? ");
         sb.append(" where idMatricula = ? ");
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update(sb.toString(), new Object[]{matricula.getCurso(),

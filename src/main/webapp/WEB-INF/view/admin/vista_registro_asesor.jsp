@@ -54,8 +54,9 @@
         </div>
         <div class="row-fluid" style=" width: 80%; padding:0 10%;">
             <div class="span10">
-                <%-- Formulario con los datos --%>   
-                <form:form class="form-horizontal" action="${pageContext.request.contextPath}/admin/save_persona" method="post" modelAttribute="usuarioDTO">
+
+                <form:form class="form-horizontal" action="${pageContext.request.contextPath}/admin/save_asesor" method="post" modelAttribute="usuarioDTO">
+                    <h2>Nuevo Asesor</h2><br><hr>
                     <form:hidden path="idpersona"/>
                     <div class="control-group">
                         <label class="control-label">Nombre</label>
@@ -73,7 +74,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Codigo</label>
+                        <label class="control-label">C&oacutedigo</label>
                         <div class="controls">
                             <form:input class="span4" path="codigo" />
                             <form:errors path="codigo" cssStyle="color:red" element="p" />
@@ -97,7 +98,7 @@
                     </div>   
 
                     <div class="control-group">
-                        <label class="control-label">Telefono</label>
+                        <label class="control-label">Tel&eacutefono</label>
                         <div class="controls">
                             <form:input class="span4" path="telefono" />
                             <form:errors path="telefono" cssStyle="color:red" element="p" />
@@ -119,7 +120,7 @@
 
                     <div class="control-group">
                         <div class="controls">
-                            <a class="btn btn-primary" href="<spring:url value="/admin/listar"/>">Regresar</a>&nbsp;&nbsp;&nbsp;                            
+                            <a class="btn btn-primary" href="<spring:url value="/admin/agregar"/>">Regresar</a>&nbsp;&nbsp;&nbsp;                            
                             <input class="btn btn-success" type="submit" value="Guardar"/>                            
                         </div>
                     </div>

@@ -29,7 +29,7 @@ public class UsuarioDTO implements Serializable{
     //@NotNull @Correo
     private String correo;
     
-    @Telefono
+    //@Telefono
     private String telefono;
     private Integer idAsesor;
     //@NotSelected

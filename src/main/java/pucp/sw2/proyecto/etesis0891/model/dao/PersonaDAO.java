@@ -72,6 +72,23 @@ public class PersonaDAO {
         PersonaBean persona = jdbcTemplate.queryForObject(query, new Object[]{codigo}, new PersonaMapper());
         return persona;
     }
+    
+    // ver rol de acuerdo al id
+    public int obtenerRolxId(int id) {
+
+        String query = " select idrol from persona where idPersona=?";
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        Integer idrol = jdbcTemplate.queryForObject(query, new Object[]{id}, new RowMapper<Integer>() {
+
+            @Override
+            public Integer mapRow(ResultSet rs, int i) throws SQLException {
+                Integer a = rs.getInt(1);
+                return a;
+            }
+        });
+        return idrol;
+    }
 
     //OBTIENE UN PERSONABEAN DE ACUERDO A SU ID
     public PersonaBean obtenerPersonaxID(Integer id) {

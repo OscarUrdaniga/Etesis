@@ -31,8 +31,6 @@ import pucp.sw2.proyecto.etesis0891.model.dto.*;
 @SessionAttributes("usuarioDTO")
 public class AdminController {
 
-    private final int CANTIDAD_PERSONAS_POR_PAGINA = 10;
-
     @Autowired
     private UsuarioDAO usuarioDAO;
 
@@ -103,9 +101,11 @@ public class AdminController {
     @RequestMapping(value = "/admin/editar")
     public String editarPersona(Model model, HttpSession sesion) {
         Integer id = (Integer) sesion.getAttribute("id");
+        Integer idrol = personaDAO.obtenerRolxId(id);
         log.info("Buscando persona: " + id);
         UsuarioDTO pb = usuarioDAO.obtenerUsuarioxID(id);
         sesion.setAttribute("id", id);
+        model.addAttribute("idrol",idrol);
         model.addAttribute("usuarioDTO", pb);
         model.addAttribute("lstAsesores", personaDAO.listarAsesores());
         model.addAttribute("lstRoles", personaDAO.listarRoles());
@@ -126,9 +126,70 @@ public class AdminController {
         } else {
             if (usuario.getIdpersona() == 0) {
                 personaDAO.agregarUsuario(persona);
+                matriculaDAO.agregarMatricula(matricula);
             } else {
                 personaDAO.updateUusario(persona);
-                matriculaDAO.updateMatriculaPorCambioAsesor(matricula);
+                matriculaDAO.updateMatriculaCompleto(matricula);
+            }
+            return "redirect:/admin/listaractivos";
+        }
+    }
+
+    @RequestMapping(value = {"/admin/save_alumno"}, method = RequestMethod.POST)
+    public String saveAlumno(@ModelAttribute("usuarioDTO") @Valid UsuarioDTO usuario, BindingResult result, Model model) {
+        PersonaBean persona = pasarDTOaBeanPersona(usuario);
+        MatriculaBean matricula = pasarDTOaBeanMatricula(usuario);
+        if (result.hasErrors()) {
+            model.addAttribute("usuarioDTO", usuario);
+            model.addAttribute("lstAsesores", personaDAO.listarAsesores());
+            model.addAttribute("lstRoles", personaDAO.listarRoles());
+            model.addAttribute("lstEstados", personaDAO.listarEstados());
+            return "/admin/vista_registro_usuario";
+        } else {
+            if (usuario.getIdpersona() == 0) {
+                personaDAO.agregarUsuario(persona);
+                matriculaDAO.agregarMatricula(matricula);
+            } else {
+                personaDAO.updateUusario(persona);
+                matriculaDAO.updateMatriculaCompleto(matricula);
+            }
+            return "redirect:/admin/listaractivos";
+        }
+    }
+
+    @RequestMapping(value = {"/admin/save_asesor"}, method = RequestMethod.POST)
+    public String saveAsesor(@ModelAttribute("usuarioDTO") @Valid UsuarioDTO usuario, BindingResult result, Model model) {
+        PersonaBean persona = pasarDTOaBeanPersona(usuario);
+        if (result.hasErrors()) {
+            model.addAttribute("usuarioDTO", usuario);
+            model.addAttribute("lstAsesores", personaDAO.listarAsesores());
+            model.addAttribute("lstRoles", personaDAO.listarRoles());
+            model.addAttribute("lstEstados", personaDAO.listarEstados());
+            return "/admin/vista_registro_usuario";
+        } else {
+            if (usuario.getIdpersona() == 0) {
+                personaDAO.agregarUsuario(persona);
+            } else {
+                personaDAO.updateUusario(persona);
+            }
+            return "redirect:/admin/listaractivos";
+        }
+    }
+
+    @RequestMapping(value = {"/admin/save_admin"}, method = RequestMethod.POST)
+    public String saveAdmin(@ModelAttribute("usuarioDTO") @Valid UsuarioDTO usuario, BindingResult result, Model model) {
+        PersonaBean persona = pasarDTOaBeanPersona(usuario);
+        if (result.hasErrors()) {
+            model.addAttribute("usuarioDTO", usuario);
+            model.addAttribute("lstAsesores", personaDAO.listarAsesores());
+            model.addAttribute("lstRoles", personaDAO.listarRoles());
+            model.addAttribute("lstEstados", personaDAO.listarEstados());
+            return "/admin/vista_registro_usuario";
+        } else {
+            if (usuario.getIdpersona() == 0) {
+                personaDAO.agregarUsuario(persona);
+            } else {
+                personaDAO.updateUusario(persona);
             }
             return "redirect:/admin/listaractivos";
         }
@@ -198,6 +259,8 @@ public class AdminController {
         matri.setIdmatricula(usuario.getIdMatricula());
         matri.setIdAlumno(usuario.getIdpersona());
         matri.setIdAsesor(usuario.getIdAsesor());
+        matri.setCiclo(usuario.getCiclo());
+        matri.setCurso(usuario.getCurso());
         return matri;
     }
 

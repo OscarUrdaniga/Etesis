@@ -53,10 +53,10 @@
             </ul>
         </div>
         <div class="row-fluid" style=" width: 80%; padding:0 10%;">
-            <div class="span10">
-                
-                <form:form class="form-horizontal" action="${pageContext.request.contextPath}/admin/save_admin" method="post" modelAttribute="usuarioDTO">
-                    <h2>Nuevo Administrador</h2><br><hr>
+            <div class="span10"><br>
+
+                <form:form class="form-horizontal" action="${pageContext.request.contextPath}/admin/save_persona" method="post" modelAttribute="usuarioDTO">
+                    <h2> Editar Usuario </h2><br><hr>
                     <form:hidden path="idpersona"/>
                     <div class="control-group">
                         <label class="control-label">Nombre</label>
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">C&oacutedigo</label>
+                        <label class="control-label">Codigo</label>
                         <div class="controls">
                             <form:input class="span4" path="codigo" />
                             <form:errors path="codigo" cssStyle="color:red" element="p" />
@@ -98,12 +98,53 @@
                     </div>   
 
                     <div class="control-group">
-                        <label class="control-label">Tel&eacutefono</label>
+                        <label class="control-label">Telefono</label>
                         <div class="controls">
                             <form:input class="span4" path="telefono" />
                             <form:errors path="telefono" cssStyle="color:red" element="p" />
                         </div>
                     </div>
+
+                    <c:if test="${idrol==3}" >
+                        <div class="control-group">
+                            <label class="control-label">Asesor</label>
+                            <div class="controls">
+                                <form:select path="idAsesor" class="span4">
+                                    <option value="">Seleccione</option>
+                                    <c:forEach items="${lstAsesores}" var="p">
+                                        <option value="${p.idpersona}" ${p.idpersona==usuarioDTO.idAsesor?"selected":""}>${p.apellidos}, ${p.nombre}</option>
+                                    </c:forEach>
+                                </form:select>
+                                <form:errors path="asesor" cssStyle="color:red" element="p" />
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${idrol==3}" >
+                        <div class="control-group">
+                            <label class="control-label">Curso</label>
+                            <div class="controls">
+                                <form:select path="curso" class="span4">
+                                    <option value="">Seleccione</option>
+                                    <option value="IEE308">IEE308</option>
+                                    <option value="IEE309">IEE309</option>
+                                </form:select>
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${idrol==3}" >
+                        <div class="control-group">
+                            <label class="control-label">Ciclo</label>
+                            <div class="controls">
+                                <form:select path="ciclo" class="span4">
+                                    <option value="">Seleccione</option>
+                                    <option value="2015-2">2015-2</option>
+                                    <option value="2016-1">2016-2</option>
+                                </form:select>
+                            </div>
+                        </div>
+                    </c:if>
 
                     <div class="control-group">
                         <label class="control-label">Estado</label>
@@ -119,8 +160,21 @@
                     </div>
 
                     <div class="control-group">
+                        <label class="control-label">Rol</label>
                         <div class="controls">
-                            <a class="btn btn-primary" href="<spring:url value="/admin/agregar"/>">Regresar</a>&nbsp;&nbsp;&nbsp;                            
+                            <form:select path="rol" class="span4">
+                                <option value="">Seleccione</option>
+                                <c:forEach items="${lstRoles}" var="p">
+                                    <option value="${p}" ${p.nombre==usuarioDTO.estado?"selected":""}>${p.nombre} </option>
+                                </c:forEach>
+                            </form:select>
+                            <form:errors path="rol" cssStyle="color:red" element="p" />                                    
+                        </div>
+                    </div>                                                
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <a class="btn btn-primary" href="<spring:url value="/admin/listaractivos"/>">Regresar</a>&nbsp;&nbsp;&nbsp;                            
                             <input class="btn btn-success" type="submit" value="Guardar"/>                            
                         </div>
                     </div>
