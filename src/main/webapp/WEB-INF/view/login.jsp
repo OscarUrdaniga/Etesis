@@ -42,7 +42,7 @@
                         <form class="well form-inline" role="form" action="${url}" method="POST">
                             <% if (request.getParameter("error") != null) {%><div class="alert alert-error">Los datos ingresados son incorrectos</div> <% }%>
                             <div class="control-group">
-                                <label class="control-label">Codigo</label>
+                                <label class="control-label">C&oacutedigo</label>
                                 <div class="controls">
                                     <input type="text" name="codigo" placeholder="20159648">
                                 </div>
@@ -52,9 +52,6 @@
                                 <div class="controls">
                                     <input type="password" name="password">
                                 </div>
-                            </div>
-                            <div class="control-group">
-                                <button type="submit" class="btn btn-success">Recuperar Contrasenia</button>
                             </div>
                             <div class="control-group">
                                 <div class="controls">

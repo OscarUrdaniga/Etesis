@@ -105,25 +105,12 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Asesor</label>
-                        <div class="controls">
-                            <form:select path="asesor" class="span4">
-                                <option value="">Seleccione</option>
-                                <c:forEach items="${lstAsesores}" var="p">
-                                    <option value="${p.idpersona}" ${p.idpersona==usuarioDTO.idAsesor?"selected":""}>${p.apellidos}, ${p.nombre}</option>
-                                </c:forEach>
-                            </form:select>
-                            <form:errors path="asesor" cssStyle="color:red" element="p" />
-                        </div>
-                    </div>
-
-                    <div class="control-group">
                         <label class="control-label">Estado</label>
                         <div class="controls">
                             <form:select path="estado" class="span4">
                                 <option value="">Seleccione</option>
                                 <c:forEach items="${lstEstados}" var="p">
-                                    <option value="${p}" ${p==personaBean.estado?"selected":""}>${p.estado} </option>
+                                    <option value="${p}" ${p==usuarioDTO.estado?"selected":""}>${p} </option>
                                 </c:forEach>
                             </form:select>
                             <form:errors path="estado" cssStyle="color:red" element="p" />                                    
@@ -131,21 +118,8 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Rol</label>
                         <div class="controls">
-                            <form:select path="rol" class="span4">
-                                <option value="">Seleccione</option>
-                                <c:forEach items="${lstRoles}" var="p">
-                                    <option value="${p.idrol}" ${p.idrol==personaBean.idpersona?"selected":""}>${p.nombre} </option>
-                                </c:forEach>
-                            </form:select>
-                            <form:errors path="rol" cssStyle="color:red" element="p" />                                    
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <div class="controls">
-                            <a class="btn btn-primary" href="<spring:url value="/admin/listar"/>">Regresar</a>&nbsp;&nbsp;&nbsp;                            
+                            <a class="btn btn-primary" href="<spring:url value="/admin/seleccionado"/>">Regresar</a>&nbsp;&nbsp;&nbsp;                            
                             <input class="btn btn-success" type="submit" value="Guardar"/>                            
                         </div>
                     </div>

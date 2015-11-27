@@ -11,8 +11,7 @@ package pucp.sw2.proyecto.etesis0891.model.bean;
  */
 public class RolBean {
     
-     private int idrol;
-     
+     private int idrol;     
       private String nombre;
 
     public int getIdrol() {

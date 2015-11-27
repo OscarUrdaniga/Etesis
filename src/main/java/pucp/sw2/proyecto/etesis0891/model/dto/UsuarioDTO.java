@@ -32,13 +32,17 @@ public class UsuarioDTO implements Serializable{
     @Telefono
     private String telefono;
     private Integer idAsesor;
-    @NotSelected
+    //@NotSelected
     private String asesor;
-    @NotSelected
+    //@NotSelected
+    private int idRol;
+    //@NotSelected
     private String rol;
-    @NotSelected
+    //@NotSelected
     private String estado;
     private int idMatricula;
+    private String curso;
+    private String ciclo;
     
     public int getIdMatricula() {
         return idMatricula;
@@ -120,6 +124,14 @@ public class UsuarioDTO implements Serializable{
         return rol;
     }
 
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
+    }
+       
     public void setRol(String rol) {
         this.rol = rol;
     }
@@ -138,6 +150,22 @@ public class UsuarioDTO implements Serializable{
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public String getCiclo() {
+        return ciclo;
+    }
+
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
     }
 
     

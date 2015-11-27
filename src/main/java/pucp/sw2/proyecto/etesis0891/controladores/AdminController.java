@@ -69,15 +69,29 @@ public class AdminController {
         return "admin/vista_usuarios_completo";
     }
 
-    //CRUD ALUMNO - ASESOR    
-    @RequestMapping(value = "/admin/agregar")
-    public String agregarUsuario(Model model, HttpSession sesion) {
+    //CRUD ALUMNO - ASESOR
+    @RequestMapping(value = "/admin/seleccionado", method = RequestMethod.POST)
+    public String definirTipoDeUsuario(@ModelAttribute("RolBean") RolBean rb, Model model) {
+        int id = rb.getIdrol();
         UsuarioDTO usuarioNuevo = new UsuarioDTO();
         model.addAttribute("usuarioDTO", usuarioNuevo);
         model.addAttribute("lstAsesores", personaDAO.listarAsesores());
         model.addAttribute("lstRoles", personaDAO.listarRoles());
         model.addAttribute("lstEstados", personaDAO.listarEstados());
-        return "admin/vista_registro_usuario";
+        if (id == 1) {
+            return "admin/vista_registro_admin";
+        } else if (id == 2) {
+            return "admin/vista_registro_asesor";
+        } else {
+            return "admin/vista_registro_alumno";
+        }
+    }
+
+    @RequestMapping(value = "/admin/agregar")
+    public String agregarUsuario(Model model, HttpSession sesion) {
+        RolBean rb = new RolBean();
+        model.addAttribute("rolBean", rb);
+        return "admin/vista_seleccionar";
     }
 
     @RequestMapping(value = "/admin/update")
@@ -131,31 +145,30 @@ public class AdminController {
     //MATRICULA//
     @RequestMapping(value = "/admin/matricular")
     public String agregarMatricula(Model model, HttpSession sesion) {
-        
+
         //model.addAttribute("personaBean",personaBean);
         return "admin/vista_registro_matricula";
     }
 
     //PAGINACION - ETESIS NORMAL//
     /*@RequestMapping(value = {"/admin/page"}, method = RequestMethod.GET)
-    public String paginar(@RequestParam(value = "idpage", required = true) Integer idpage, Model model, HttpSession sesion) {
-        Integer cantPag = (Integer) sesion.getAttribute("cantPag");
-        if (idpage >= 1 && idpage <= cantPag) {
-            List<UsuarioDTO> lstUsuariosCompleto;
-            lstUsuariosCompleto = usuarioDAO.listarPorPagina(idpage, CANTIDAD_PERSONAS_POR_PAGINA);
-            model.addAttribute("lstUsuariosCompleto", lstUsuariosCompleto);
-            sesion.setAttribute("lstUsuariosCompleto", lstUsuariosCompleto);
-            sesion.setAttribute("idpage", idpage);
-            sesion.setAttribute("cantPag", cantPag);
-            return "/admin/vista_usuarios_completo";
+     public String paginar(@RequestParam(value = "idpage", required = true) Integer idpage, Model model, HttpSession sesion) {
+     Integer cantPag = (Integer) sesion.getAttribute("cantPag");
+     if (idpage >= 1 && idpage <= cantPag) {
+     List<UsuarioDTO> lstUsuariosCompleto;
+     lstUsuariosCompleto = usuarioDAO.listarPorPagina(idpage, CANTIDAD_PERSONAS_POR_PAGINA);
+     model.addAttribute("lstUsuariosCompleto", lstUsuariosCompleto);
+     sesion.setAttribute("lstUsuariosCompleto", lstUsuariosCompleto);
+     sesion.setAttribute("idpage", idpage);
+     sesion.setAttribute("cantPag", cantPag);
+     return "/admin/vista_usuarios_completo";
 
-        } else {
-            List<UsuarioDTO> lstUsuariosCompleto = (List<UsuarioDTO>) sesion.getAttribute("lstUsuariosCompleto");
-            model.addAttribute("lstUsuariosCompleto", lstUsuariosCompleto);
-            return "/admin/vista_usuarios_completo";
-        }
-    }*/
-     
+     } else {
+     List<UsuarioDTO> lstUsuariosCompleto = (List<UsuarioDTO>) sesion.getAttribute("lstUsuariosCompleto");
+     model.addAttribute("lstUsuariosCompleto", lstUsuariosCompleto);
+     return "/admin/vista_usuarios_completo";
+     }
+     }*/
     //FUNCIONES AUXILIARES
     private PersonaBean pasarDTOaBeanPersona(UsuarioDTO usuario) {
         PersonaBean pb = new PersonaBean();
@@ -168,13 +181,13 @@ public class AdminController {
         pb.setTelefono(usuario.getTelefono());
         pb.setEstado(usuario.getEstado());
         RolBean rb = new RolBean();
-        rb.setNombre(usuario.getRol());
-        if (rb.getNombre().equalsIgnoreCase("ADMIN")) {
-            rb.setIdrol(1);
-        } else if (rb.getNombre().equalsIgnoreCase("ASESOR")) {
-            rb.setIdrol(2);
+        rb.setIdrol(usuario.getIdRol());
+        if (rb.getIdrol() == 1) {
+            rb.setNombre("ADMIN");
+        } else if (rb.getIdrol() == 2) {
+            rb.setNombre("ASESOR");
         } else {
-            rb.setIdrol(3);
+            rb.setNombre("ALUMNO");
         }
         pb.setRol(rb);
         return pb;
